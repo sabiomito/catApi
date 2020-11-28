@@ -18,6 +18,8 @@ public class CatDataBase {
             System.out.println(e.getMessage());
         }
     }
+
+
     public void insertBreed(CatBreed breed)
     {
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db")) {
@@ -42,4 +44,6 @@ public class CatDataBase {
             System.out.println(e.getMessage());
         }
     }
+
+   
 }

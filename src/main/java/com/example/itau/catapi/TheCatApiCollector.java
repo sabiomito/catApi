@@ -29,12 +29,12 @@ public class TheCatApiCollector {
     }
 
     public Cat[] getImagesUrlsWithSunglasses(){
-        String url = "https://api.thecatapi.com/v1/images/search?category_ids=4&limit={0}";
-        return this.restTemplate.getForObject(url, Cat[].class,3);
+        String url = "https://api.thecatapi.com/v1/images/search?category_ids={0}&limit={1}";
+        return this.restTemplate.getForObject(url, Cat[].class,4,3);
     }
 
     public Cat[] getImagesUrlsWithHats(){
-        String url = "https://api.thecatapi.com/v1/images/search?category_ids=1&limit={0}";
-        return this.restTemplate.getForObject(url, Cat[].class,3);
+        String url = "https://api.thecatapi.com/v1/images/search?category_ids={0}&limit={1}";
+        return this.restTemplate.getForObject(url, Cat[].class,1,3);
     }
 }
