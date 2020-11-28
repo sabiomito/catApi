@@ -11,6 +11,10 @@ public class TheCatApiCollector {
 
     private final RestTemplate restTemplate;
 
+    public RestTemplate getRestTemplate() {
+        return restTemplate;
+    }
+
     public TheCatApiCollector() {
          restTemplate = new RestTemplateBuilder(rt-> rt.getInterceptors().add((request, body, execution) -> {
             request.getHeaders().add("x-api-key", "d40cdc46-df68-4dac-882d-41353c4d4838");
