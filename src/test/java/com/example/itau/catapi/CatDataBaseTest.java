@@ -28,6 +28,15 @@ class CatDataBaseTest {
         return cat;
     }
 
+    private CatBreed getRandomBreed()
+    {
+        CatBreed breed = new CatBreed();
+        breed.setTemperament(StringUtils.getRandomString());
+        breed.setOrigin(StringUtils.getRandomString());
+        breed.setName(StringUtils.getRandomString());
+        return breed;
+    }
+
     @Test
     void CatDataBaseConstructor() {
         try{
@@ -47,6 +56,15 @@ class CatDataBaseTest {
     }
 
     @Test
+    void insertBreed() {
+        try{
+            dataBase.insertBreed(getRandomBreed());
+        }catch (SQLException e){
+            fail(e.toString());
+        }
+    }
+
+    @Test
     void getBreeds() {
         try{
             assertThat(dataBase.getBreeds()).isInstanceOf(CatBreed[].class);
@@ -56,7 +74,7 @@ class CatDataBaseTest {
     }
 
     @Test
-    void  getBreedInfo(){//CatBreed
+    void  getBreedInfo(){
         try{
             dataBase.getBreedInfo(StringUtils.getRandomString());
         }catch (SQLException e){
@@ -65,13 +83,21 @@ class CatDataBaseTest {
     }
 
     @Test
-    void  getBreedsByTemperament() {//CatBreed[]
-        throw new UnsupportedOperationException();
+    void  getBreedsByTemperament() {
+        try{
+            dataBase.getBreedsByTemperament("friendly");
+        }catch (SQLException e){
+            fail(e.toString());
+        }
     }
 
     @Test
-    void  getBreedsByorigin() {//CatBreed[]
-        throw new UnsupportedOperationException();
+    void  getBreedsByorigin() {
+        try{
+            dataBase.getBreedsByorigin(StringUtils.getRandomString());
+        }catch (SQLException e){
+            fail(e.toString());
+        }
     }
 
 

@@ -48,6 +48,45 @@ public class CatDataBase {
         Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db");
         PreparedStatement stmt = connection.prepareStatement("select * from CAT_BREED");
         ResultSet resultSet = stmt.executeQuery();
+        return parseResultSetToCatBreedArray(resultSet);
+    }
+
+    public CatBreed getBreedInfo(String breedName) throws SQLException
+    {
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db");
+        PreparedStatement stmt = connection.prepareStatement("select * from CAT_BREED WHERE name = ?");
+        stmt.setString(1,breedName);
+        ResultSet resultSet = stmt.executeQuery();
+        if (resultSet.next()){
+            CatBreed breed = new CatBreed(resultSet.getString("origin"),resultSet.getString("name"),resultSet.getString("temperament"));
+            System.out.println( breed.toString());
+            return breed;
+        }else
+        {
+            return BREED_NOT_FOUND;
+        }
+    }
+
+    public CatBreed[] getBreedsByTemperament(String temperament) throws SQLException
+    {
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db");
+        PreparedStatement stmt = connection.prepareStatement("select * from CAT_BREED WHERE temperament LIKE ?");
+        stmt.setString(1,"%"+temperament+"%");
+        ResultSet resultSet = stmt.executeQuery();
+        return parseResultSetToCatBreedArray(resultSet);
+    }
+
+    public CatBreed[] getBreedsByorigin(String origin) throws SQLException
+    {
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db");
+        PreparedStatement stmt = connection.prepareStatement("select * from CAT_BREED WHERE origin = ?");
+        stmt.setString(1,origin);
+        ResultSet resultSet = stmt.executeQuery();
+        return parseResultSetToCatBreedArray(resultSet);
+    }
+
+    private CatBreed[] parseResultSetToCatBreedArray(ResultSet resultSet) throws SQLException
+    {
         List<CatBreed> results = new ArrayList<CatBreed>();
         while (resultSet.next()) {
             CatBreed breed = new CatBreed(resultSet.getString("origin"),resultSet.getString("name"),resultSet.getString("temperament"));
@@ -61,21 +100,5 @@ public class CatDataBase {
         }
         return resultArray;
     }
-
-    public CatBreed getBreedInfo(String breedName) throws SQLException
-    {
-        throw new UnsupportedOperationException();
-    }
-
-    public CatBreed[] getBreedsByTemperament(String temperament) throws SQLException
-    {
-        throw new UnsupportedOperationException();
-    }
-
-    public CatBreed[] getBreedsByorigin(String origin) throws SQLException
-    {
-        throw new UnsupportedOperationException();
-    }
-
 
 }
