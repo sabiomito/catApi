@@ -3,6 +3,24 @@ package com.example.itau.catapi;
 public class Cat {
     private String id;
     private String url;
+    private String breed;
+    private String object;
+
+    public String getObject() {
+        return object;
+    }
+
+    public void setObject(String object) {
+        this.object = object;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
 
     public String getId() {
         return id;
@@ -25,6 +43,8 @@ public class Cat {
         return "Cat{" +
                 "id='" + id + '\'' +
                 ", url='" + url + '\'' +
+                ", breed='" + breed + '\'' +
+                ", object='" + object + '\'' +
                 '}';
     }
 }

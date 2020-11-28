@@ -17,9 +17,9 @@ public class CatApiApplication {
         //connect();
         TheCatApiCollector catApiGetter = new TheCatApiCollector();
         CatDataBase catDataBase = new CatDataBase();
-        for (CatBreed breed: catApiGetter.getBreeds()) {
-            System.out.println(breed.toString());
-            catDataBase.insertBreed(breed);
+        for (Cat cat: catApiGetter.getImagesUrlsWithHats()) {
+            System.out.println(cat.toString());
+            catDataBase.insertCatImageUrl(cat);
         }
         SpringApplication.run(CatApiApplication.class, args);
     }
