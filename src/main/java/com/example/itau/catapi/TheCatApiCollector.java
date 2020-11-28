@@ -23,12 +23,24 @@ public class TheCatApiCollector {
         return this.restTemplate.getForObject(url, CatBreed[].class);
     }
 
-    public String testApi(){
-        String url = "https://api.thecatapi.com/v1/breeds?api";
-        return this.restTemplate.getForObject(url, String.class);
+    public Cat[] getImagesUrls(String breedId){
+        String url = "https://api.thecatapi.com/v1/images/search?breed_ids={0}&limit={1}";
+        return this.restTemplate.getForObject(url, Cat[].class,breedId,3);
+    }
+
+    public Cat[] getImagesUrlsWithSunglasses(){
+        String url = "https://api.thecatapi.com/v1/images/search?category_ids=4&limit={0}";
+        return this.restTemplate.getForObject(url, Cat[].class,3);
+    }
+
+    public Cat[] getImagesUrlsWithHats(){
+        String url = "https://api.thecatapi.com/v1/images/search?category_ids=1&limit={0}";
+        return this.restTemplate.getForObject(url, Cat[].class,3);
     }
 
     public void testApiRequest(){
-        System.out.println(getBreeds()[0].toString());
+        for (Cat cat:getImagesUrlsWithHats()) {
+            System.out.println(cat.toString());
+        }
     }
 }
