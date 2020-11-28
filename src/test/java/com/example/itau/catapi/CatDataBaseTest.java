@@ -3,10 +3,8 @@ package com.example.itau.catapi;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.client.RestTemplate;
 
 import java.sql.SQLException;
-import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -76,7 +74,7 @@ class CatDataBaseTest {
     @Test
     void  getBreedInfo(){
         try{
-            dataBase.getBreedInfo(StringUtils.getRandomString());
+            dataBase.getBreedByName(StringUtils.getRandomString());
         }catch (SQLException e){
             fail(e.toString());
         }
@@ -92,9 +90,18 @@ class CatDataBaseTest {
     }
 
     @Test
-    void  getBreedsByorigin() {
+    void  getBreedsByOrigin() {
         try{
-            dataBase.getBreedsByorigin(StringUtils.getRandomString());
+            dataBase.getBreedsByOrigin("China");
+        }catch (SQLException e){
+            fail(e.toString());
+        }
+    }
+
+    @Test
+    void  getBreedsByName() {
+        try{
+            dataBase.getBreedByName("belinese");
         }catch (SQLException e){
             fail(e.toString());
         }

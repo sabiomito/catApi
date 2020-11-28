@@ -19,8 +19,8 @@ public class CatDataBase {
     private void initializeDB() throws SQLException {
         Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db");
         Statement statement = connection.createStatement();
-        statement.execute("CREATE TABLE IF NOT EXISTS CAT_BREED(origin TEXT NOT NULL,temperament TEXT NOT NULL, ID INTEGER,name TEXT, PRIMARY KEY(ID AUTOINCREMENT))");
-        statement.execute("CREATE TABLE IF NOT EXISTS CAT_IMAGE ( ID INTEGER NOT NULL, url TEXT NOT NULL, object TEXT, PRIMARY KEY(ID AUTOINCREMENT))");
+        statement.execute("CREATE TABLE IF NOT EXISTS CAT_BREED(origin TEXT NOT NULL,temperament TEXT NOT NULL, ID INTEGER,name TEXT UNIQUE, PRIMARY KEY(ID AUTOINCREMENT))");
+        statement.execute("CREATE TABLE IF NOT EXISTS CAT_IMAGE ( ID INTEGER NOT NULL, url TEXT NOT NULL UNIQUE, object TEXT, PRIMARY KEY(ID AUTOINCREMENT))");
     }
 
 
@@ -51,16 +51,16 @@ public class CatDataBase {
         return parseResultSetToCatBreedArray(resultSet);
     }
 
-    public CatBreed getBreedInfo(String breedName) throws SQLException
+    public CatBreed getBreedByName(String breedName) throws SQLException
     {
         Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db");
         PreparedStatement stmt = connection.prepareStatement("select * from CAT_BREED WHERE name = ?");
         stmt.setString(1,breedName);
         ResultSet resultSet = stmt.executeQuery();
-        if (resultSet.next()){
-            CatBreed breed = new CatBreed(resultSet.getString("origin"),resultSet.getString("name"),resultSet.getString("temperament"));
-            System.out.println( breed.toString());
-            return breed;
+        CatBreed[] results = parseResultSetToCatBreedArray(resultSet);
+        if(results.length > 0)
+        {
+            return results[0];
         }else
         {
             return BREED_NOT_FOUND;
@@ -76,7 +76,7 @@ public class CatDataBase {
         return parseResultSetToCatBreedArray(resultSet);
     }
 
-    public CatBreed[] getBreedsByorigin(String origin) throws SQLException
+    public CatBreed[] getBreedsByOrigin(String origin) throws SQLException
     {
         Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db");
         PreparedStatement stmt = connection.prepareStatement("select * from CAT_BREED WHERE origin = ?");
