@@ -12,20 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class TheCatApiCollectorTest {
 
-    private String getRandomString()
-    {
-        int leftLimit = 48; // numeral '0'
-        int rightLimit = 122; // letter 'z'
-        int targetStringLength = 10;
-        Random random = new Random();
-
-        String randomString = random.ints(leftLimit, rightLimit + 1)
-                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-                .limit(targetStringLength)
-                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString();
-        return randomString;
-    }
 
     @Autowired
     private TheCatApiCollector collector;
@@ -42,7 +28,7 @@ class TheCatApiCollectorTest {
 
     @Test
     void getImagesUrls(){
-        assertThat(collector.getImagesUrls(getRandomString())).isInstanceOf(Cat[].class);
+        assertThat(collector.getImagesUrls(StringUtils.getRandomString())).isInstanceOf(Cat[].class);
     }
 
     @Test

@@ -7,6 +7,19 @@ public class CatBreed implements Serializable {
     private String name;
     private String temperament;
 
+    public CatBreed()
+    {
+        origin = "";
+        name = "";
+        temperament = "";
+    }
+
+    public CatBreed(String origin, String name, String temperament) {
+        this.origin = origin;
+        this.name = name;
+        this.temperament = temperament;
+    }
+
     public String getOrigin() {
         return origin;
     }

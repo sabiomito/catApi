@@ -14,12 +14,20 @@ import java.sql.*;
 public class CatApiApplication {
 
     public static void main(String[] args) {
-        //connect();
-        TheCatApiCollector catApiGetter = new TheCatApiCollector();
-        CatDataBase catDataBase = new CatDataBase();
-        for (Cat cat: catApiGetter.getImagesUrlsWithHats()) {
-            System.out.println(cat.toString());
-            catDataBase.insertCatImageUrl(cat);
+        try {
+            TheCatApiCollector catApiGetter = new TheCatApiCollector();
+            CatDataBase catDataBase = new CatDataBase();
+            for (Cat cat : catApiGetter.getImagesUrlsWithHats()) {
+                System.out.println(cat.toString());
+                catDataBase.insertCatImageUrl(cat);
+            }
+            for (CatBreed breed : catApiGetter.getBreeds()) {
+                System.out.println(breed.toString());
+                catDataBase.insertBreed(breed);
+            }
+        }catch (SQLException e)
+        {
+
         }
         SpringApplication.run(CatApiApplication.class, args);
     }

@@ -1,48 +1,80 @@
 package com.example.itau.catapi;
 
-import java.sql.*;
+import org.springframework.stereotype.Service;
 
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
 public class CatDataBase {
 
-    CatDataBase()
+    public static CatBreed BREED_NOT_FOUND = new CatBreed("NotFound","NotFound","NotFound");
+
+    public CatDataBase() throws SQLException
     {
         initializeDB();
     }
 
-    private void initializeDB() {
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db")) {
-            Statement statement = connection.createStatement();
-            statement.execute("CREATE TABLE IF NOT EXISTS CAT_BREED(origin TEXT NOT NULL,temperament TEXT NOT NULL, ID INTEGER,name TEXT, PRIMARY KEY(ID AUTOINCREMENT))");
-            statement.execute("CREATE TABLE IF NOT EXISTS CAT_IMAGE ( ID INTEGER NOT NULL, url TEXT NOT NULL, object TEXT, PRIMARY KEY(ID AUTOINCREMENT))");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+    private void initializeDB() throws SQLException {
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db");
+        Statement statement = connection.createStatement();
+        statement.execute("CREATE TABLE IF NOT EXISTS CAT_BREED(origin TEXT NOT NULL,temperament TEXT NOT NULL, ID INTEGER,name TEXT, PRIMARY KEY(ID AUTOINCREMENT))");
+        statement.execute("CREATE TABLE IF NOT EXISTS CAT_IMAGE ( ID INTEGER NOT NULL, url TEXT NOT NULL, object TEXT, PRIMARY KEY(ID AUTOINCREMENT))");
     }
 
 
-    public void insertBreed(CatBreed breed)
+    public void insertBreed(CatBreed breed) throws SQLException
     {
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db")) {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO CAT_BREED( origin, temperament, name) VALUES (?,?,?)");
-            statement.setString(1, breed.getOrigin());
-            statement.setString(2, breed.getTemperament());
-            statement.setString(3, breed.getName());
-            statement.execute();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db");
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO CAT_BREED( origin, temperament, name) VALUES (?,?,?)");
+        statement.setString(1, breed.getOrigin());
+        statement.setString(2, breed.getTemperament());
+        statement.setString(3, breed.getName());
+        statement.execute();
     }
 
-    public void insertCatImageUrl(Cat cat)
+    public void insertCatImageUrl(Cat cat) throws SQLException
     {
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db")) {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO CAT_IMAGE( url , object) VALUES (?,?)");
-            statement.setString(1, cat.getUrl());
-            statement.setString(2, cat.getObject());
-            statement.execute();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db");
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO CAT_IMAGE( url , object) VALUES (?,?)");
+        statement.setString(1, cat.getUrl());
+        statement.setString(2, cat.getObject());
+        statement.execute();
+    }
+
+    public CatBreed[] getBreeds() throws SQLException
+    {
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db");
+        PreparedStatement stmt = connection.prepareStatement("select * from CAT_BREED");
+        ResultSet resultSet = stmt.executeQuery();
+        List<CatBreed> results = new ArrayList<CatBreed>();
+        while (resultSet.next()) {
+            CatBreed breed = new CatBreed(resultSet.getString("origin"),resultSet.getString("name"),resultSet.getString("temperament"));
+            results.add(breed);
+            System.out.println( breed.toString());
         }
+        CatBreed[] resultArray = new CatBreed[results.size()];
+        for(int i=0;i<results.size();i++)
+        {
+            resultArray[i] = results.get(i);
+        }
+        return resultArray;
+    }
+
+    public CatBreed getBreedInfo(String breedName) throws SQLException
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    public CatBreed[] getBreedsByTemperament(String temperament) throws SQLException
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    public CatBreed[] getBreedsByorigin(String origin) throws SQLException
+    {
+        throw new UnsupportedOperationException();
     }
 
 
