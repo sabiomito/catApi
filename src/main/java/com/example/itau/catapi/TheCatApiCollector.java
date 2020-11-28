@@ -37,10 +37,4 @@ public class TheCatApiCollector {
         String url = "https://api.thecatapi.com/v1/images/search?category_ids=1&limit={0}";
         return this.restTemplate.getForObject(url, Cat[].class,3);
     }
-
-    public void testApiRequest(){
-        for (Cat cat:getImagesUrlsWithHats()) {
-            System.out.println(cat.toString());
-        }
-    }
 }

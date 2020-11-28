@@ -16,25 +16,16 @@ public class CatApiApplication {
     public static void main(String[] args) {
         //connect();
         TheCatApiCollector catApiGetter = new TheCatApiCollector();
-        catApiGetter.testApiRequest();
+        CatDataBase catDataBase = new CatDataBase();
+        for (CatBreed breed: catApiGetter.getBreeds()) {
+            System.out.println(breed.toString());
+            catDataBase.insertBreed(breed);
+        }
         SpringApplication.run(CatApiApplication.class, args);
     }
     @GetMapping("/hello")
     public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
         return String.format("Hello %s!", name);
     }
-
-
-    private static void connect() {
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db")) {
-            Statement statement = connection.createStatement();
-            statement.execute("CREATE TABLE IF NOT EXISTS CAT_BREED(origin TEXT NOT NULL,temperament TEXT NOT NULL, ID INTEGER,name TEXT, PRIMARY KEY(ID AUTOINCREMENT))");
-            statement.execute("CREATE TABLE IF NOT EXISTS CAT_IMAGE ( ID INTEGER NOT NULL, BREED INTEGER NOT NULL, url TEXT NOT NULL, object TEXT, PRIMARY KEY(ID AUTOINCREMENT), FOREIGN KEY(BREED) REFERENCES CAT_BREED)");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-
 
 }
