@@ -25,6 +25,7 @@ public class TheCatApiCollector {
     public CatBreed[] getBreeds(){
         String url = "https://api.thecatapi.com/v1/breeds";
         return this.restTemplate.getForObject(url, CatBreed[].class);
+
     }
 
     public Cat[] getImagesUrls(String breedId){

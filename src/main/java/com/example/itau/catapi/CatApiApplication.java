@@ -1,5 +1,6 @@
 package com.example.itau.catapi;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
@@ -14,6 +15,8 @@ import java.sql.*;
 @SpringBootApplication
 @RestController
 public class CatApiApplication {
+
+    ObjectMapper jsonMapper = new ObjectMapper();
 
     public static void main(String[] args) {
         SpringApplication.run(CatApiApplication.class, args);

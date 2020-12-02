@@ -87,7 +87,7 @@ public class CatDataBase {
 
     private CatBreed[] parseResultSetToCatBreedArray(ResultSet resultSet) throws SQLException
     {
-        List<CatBreed> results = new ArrayList<CatBreed>();
+        ArrayList<CatBreed> results = new ArrayList<CatBreed>();
         while (resultSet.next()) {
             CatBreed breed = new CatBreed(resultSet.getString("origin"),resultSet.getString("name"),resultSet.getString("temperament"));
             results.add(breed);
