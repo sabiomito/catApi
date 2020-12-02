@@ -10,6 +10,7 @@ public class JsonResponse {
     public static String STATUS_OK = "OK";
     public static String STATUS_FAILED = "FALHA";
     public static String INTERNAL_ERROR = "Erro Interno";
+    public static String API_KEY_ERROR = "A chave de api está errada ou faltando no header consulte https://github.com/sabiomito/catApi para mais detalhes";
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     private String status;
     private String errorMessage;
@@ -50,8 +51,19 @@ public class JsonResponse {
 
     public static String getFailJsonWithMapperError()
     {
-        return "{status:\""+STATUS_FAILED+"\",\nerrorMessage:\""+"INTERNAL_ERROR"+"\"}";
+        return "{\"status\":\""+STATUS_FAILED+"\",\"errorMessage\":\""+INTERNAL_ERROR+"\"}";
     }
+
+    public static String getApiKeyError()
+    {
+        return "{\"status\":\""+STATUS_FAILED+"\",\"errorMessage\":\""+API_KEY_ERROR+"\"}";
+    }
+
+    public static String invalidArgument(String name)
+    {
+        return "{\"status\":\""+STATUS_FAILED+"\",\"errorMessage\":\"O argumento "+name+" é invalido.\"}";
+    }
+
 
     @Override
     public String toString() {

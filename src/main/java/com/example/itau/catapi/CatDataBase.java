@@ -51,6 +51,7 @@ public class CatDataBase {
         return parseResultSetToCatBreedArray(resultSet);
     }
 
+
     public CatBreed getBreedByName(String breedName) throws SQLException
     {
         Connection connection = DriverManager.getConnection("jdbc:sqlite:catDB.db");
