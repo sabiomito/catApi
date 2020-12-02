@@ -1,6 +1,5 @@
 package com.example.itau.catapi;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
@@ -16,16 +15,10 @@ import java.sql.*;
 @RestController
 public class CatApiApplication {
 
-    ObjectMapper jsonMapper = new ObjectMapper();
-
     public static void main(String[] args) {
         SpringApplication.run(CatApiApplication.class, args);
     }
 
-    @GetMapping("/hello")
-    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return String.format("Hello %s!", name);
-    }
 
     @GetMapping("/getDataFromTheCatApi")
     public String getDataFromTheCatApi() {
@@ -40,10 +33,10 @@ public class CatApiApplication {
                 System.out.println(breed.toString());
                 catDataBase.insertBreed(breed);
             }
-            return "SUCESS";
+           return new JsonResponse(JsonResponse.STATUS_OK,"").toString();
         }catch (SQLException e)
         {
-            return String.format("ERROR -- "+e);
+            return new JsonResponse(JsonResponse.STATUS_FAILED,e.getMessage()).toString();
         }
     }
 
@@ -54,12 +47,8 @@ public class CatApiApplication {
             return "Não implementado ainda name="+name+" temperament="+temperament+" origin="+origin;
         }
         try {
-            String result = "";
             CatDataBase catDataBase = new CatDataBase();
-            for (CatBreed breed : catDataBase.getBreeds()) {
-                result += breed.toString()+"<br>";
-            }
-            return result;
+            return new BreedsResponse(catDataBase.getBreeds()).toString();
         }catch (SQLException e)
         {
             return String.format("ERROR -- "+e);
@@ -71,25 +60,21 @@ public class CatApiApplication {
 
         try {
             CatDataBase catDataBase = new CatDataBase();
-            return catDataBase.getBreedByName(name).toString();
+            return new BreedsResponse(new CatBreed[]{catDataBase.getBreedByName(name)}).toString();
         }catch (SQLException e)
         {
-            return String.format("ERROR -- "+e);
+            return new JsonResponse(JsonResponse.STATUS_FAILED,e.getMessage()).toString();
         }
     }
 
     @GetMapping("/breedsBytemperament")
     public String getBreedsByTemperament(@RequestParam(value = "temperament", defaultValue = "") String temperament) {
         try {
-            String result = "";
             CatDataBase catDataBase = new CatDataBase();
-            for (CatBreed breed : catDataBase.getBreedsByTemperament(temperament)) {
-                result += breed.toString()+"<br>";
-            }
-            return result;
+            return new BreedsResponse(catDataBase.getBreedsByTemperament(temperament)).toString();
         }catch (SQLException e)
         {
-            return String.format("ERROR -- "+e);
+            return new JsonResponse(JsonResponse.STATUS_FAILED,e.getMessage()).toString();
         }
     }
 
@@ -97,15 +82,11 @@ public class CatApiApplication {
     @GetMapping("/breedsByOrigin")
     public String getBreedsByOrigin(@RequestParam(value = "origin", defaultValue = "") String origin) {
         try {
-            String result = "";
             CatDataBase catDataBase = new CatDataBase();
-            for (CatBreed breed : catDataBase.getBreedsByOrigin(origin)) {
-                result += breed.toString()+"<br>";
-            }
-            return result;
+            return new BreedsResponse(catDataBase.getBreedsByOrigin(origin)).toString();
         }catch (SQLException e)
         {
-            return String.format("ERROR -- "+e);
+            return new JsonResponse(JsonResponse.STATUS_FAILED,e.getMessage()).toString();
         }
     }
 
