@@ -1,0 +1,837 @@
+{
+	"info": {
+		"_postman_id": "8b54fb67-924e-4e92-9dd1-5dfb87a0ff58",
+		"name": "CatApiCollection",
+		"description": "Coleção da api para processo seletivo do banco itau",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SucessRequests",
+			"item": [
+				{
+					"name": "getBreedByName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "05175815-17cf-483f-856f-d6689a952796",
+								"exec": [
+									"var jsonData = pm.response.json(); \r",
+									"pm.test(\"Verify Status\", function () { \r",
+									"        pm.expect(jsonData.status).is.to.equal(\"OK\"); \r",
+									"    });\r",
+									"\r",
+									"pm.test(\"Verify errorMessage\", function () { \r",
+									"        pm.expect(jsonData.errorMessage).is.to.equal(\"\"); \r",
+									"    });\r",
+									"\r",
+									"pm.test(\"Verify name\", function () { \r",
+									"        pm.expect(jsonData.breeds[0].name).is.to.equal(\"Bambino\"); \r",
+									"    });\r",
+									"    \r",
+									"pm.test(\"Verify origin\", function () { \r",
+									"        pm.expect(jsonData.breeds[0].origin).is.to.equal(\"United States\"); \r",
+									"    });\r",
+									"    \r",
+									"pm.test(\"Verify temperament\", function () { \r",
+									"        pm.expect(jsonData.breeds[0].temperament).is.to.equal(\"Affectionate, Lively, Friendly, Intelligent\"); \r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "PUBLIC_TEST_API_KEY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/breedByName?name=Bambino",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"breedByName"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Bambino"
+								}
+							]
+						},
+						"description": "Recupera todas as raças que contem o nome passado por parametro."
+					},
+					"response": []
+				},
+				{
+					"name": "breedsBytemperament",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8dfeb7bd-0160-405a-98d9-b3c36095e245",
+								"exec": [
+									"var jsonData = pm.response.json(); \r",
+									"pm.test(\"Verify Status\", function () { \r",
+									"        pm.expect(jsonData.status).is.to.equal(\"OK\"); \r",
+									"    });\r",
+									"\r",
+									"pm.test(\"Verify errorMessage\", function () { \r",
+									"        pm.expect(jsonData.errorMessage).is.to.equal(\"\"); \r",
+									"    });\r",
+									"\r",
+									"pm.test(\"Verify name\", function () { \r",
+									"        pm.expect(jsonData.breeds[0].name).is.to.equal(\"Abyssinian\"); \r",
+									"    });\r",
+									"    \r",
+									"pm.test(\"Verify origin\", function () { \r",
+									"        pm.expect(jsonData.breeds[0].origin).is.to.equal(\"Egypt\"); \r",
+									"    });\r",
+									"    \r",
+									"pm.test(\"Verify temperament\", function () { \r",
+									"        pm.expect(jsonData.breeds[0].temperament).is.to.equal(\"Active, Energetic, Independent, Intelligent, Gentle\"); \r",
+									"    });\r",
+									"\r",
+									"pm.test(\"Verify temperament\", function () { \r",
+									"        pm.expect(jsonData.breeds.length).is.to.equal(46); \r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "PUBLIC_TEST_API_KEY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/breedsBytemperament?temperament=Intelligent",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"breedsBytemperament"
+							],
+							"query": [
+								{
+									"key": "temperament",
+									"value": "Intelligent"
+								}
+							]
+						},
+						"description": "Recupera todas as raças que contem o temperamento passado por parametro."
+					},
+					"response": []
+				},
+				{
+					"name": "breedsByOrigin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ac2fb45a-595c-49ab-b5f6-8371e47bff0d",
+								"exec": [
+									"var jsonData = pm.response.json(); \r",
+									"pm.test(\"Verify Status\", function () { \r",
+									"        pm.expect(jsonData.status).is.to.equal(\"OK\"); \r",
+									"    });\r",
+									"\r",
+									"pm.test(\"Verify errorMessage\", function () { \r",
+									"        pm.expect(jsonData.errorMessage).is.to.equal(\"\"); \r",
+									"    });\r",
+									"\r",
+									"pm.test(\"Verify name\", function () { \r",
+									"        pm.expect(jsonData.breeds[0].name).is.to.equal(\"Abyssinian\"); \r",
+									"    });\r",
+									"    \r",
+									"pm.test(\"Verify origin\", function () { \r",
+									"        pm.expect(jsonData.breeds[0].origin).is.to.equal(\"Egypt\"); \r",
+									"    });\r",
+									"    \r",
+									"pm.test(\"Verify temperament\", function () { \r",
+									"        pm.expect(jsonData.breeds[0].temperament).is.to.equal(\"Active, Energetic, Independent, Intelligent, Gentle\"); \r",
+									"    });\r",
+									"\r",
+									"pm.test(\"Verify temperament\", function () { \r",
+									"        pm.expect(jsonData.breeds.length).is.to.equal(3); \r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "PUBLIC_TEST_API_KEY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/breedsByOrigin?origin=Egypt",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"breedsByOrigin"
+							],
+							"query": [
+								{
+									"key": "origin",
+									"value": "Egypt"
+								}
+							]
+						},
+						"description": "Recupera todas as raças que contem a origem passado por parametro."
+					},
+					"response": []
+				},
+				{
+					"name": "getAllBreeds",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f6b9a0c3-0a46-4b9c-adde-750c5e10b78d",
+								"exec": [
+									"var jsonData = pm.response.json(); \r",
+									"pm.test(\"Verify Status\", function () { \r",
+									"        pm.expect(jsonData.status).is.to.equal(\"OK\"); \r",
+									"    });\r",
+									"\r",
+									"pm.test(\"Verify errorMessage\", function () { \r",
+									"        pm.expect(jsonData.errorMessage).is.to.equal(\"\"); \r",
+									"    });\r",
+									"\r",
+									"pm.test(\"Verify name\", function () { \r",
+									"        pm.expect(jsonData.breeds[0].name).is.to.equal(\"Abyssinian\"); \r",
+									"    });\r",
+									"    \r",
+									"pm.test(\"Verify origin\", function () { \r",
+									"        pm.expect(jsonData.breeds[0].origin).is.to.equal(\"Egypt\"); \r",
+									"    });\r",
+									"    \r",
+									"pm.test(\"Verify temperament\", function () { \r",
+									"        pm.expect(jsonData.breeds[0].temperament).is.to.equal(\"Active, Energetic, Independent, Intelligent, Gentle\"); \r",
+									"    });\r",
+									"\r",
+									"pm.test(\"Verify temperament\", function () { \r",
+									"        pm.expect(jsonData.breeds.length).is.to.equal(67); \r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"type": "text",
+								"value": "PUBLIC_TEST_API_KEY"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/breeds",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"breeds"
+							]
+						},
+						"description": "Recupera uma lista de todas as raças"
+					},
+					"response": []
+				}
+			],
+			"description": "Requisições que devem retornar resultados validos",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ErrorRequests",
+			"item": [
+				{
+					"name": "APIKeyError",
+					"item": [
+						{
+							"name": "getAllBreedsApiKeyError",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7373b342-fa1d-4df5-9e13-2a7adaeb3981",
+										"exec": [
+											"var jsonData = pm.response.json(); \r",
+											"pm.test(\"Verify Status\", function () { \r",
+											"        pm.expect(jsonData.status).is.to.equal(\"FALHA\"); \r",
+											"    });\r",
+											"\r",
+											"pm.test(\"Verify errorMessage\", function () { \r",
+											"        pm.expect(jsonData.errorMessage).is.to.equal(\"A chave de api está errada ou faltando no header consulte https://github.com/sabiomito/catApi para mais detalhes\"); \r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-API-KEY",
+										"type": "text",
+										"value": "PUBLIC_TEST_API_KEY_WITH_ERROR"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/breeds",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"breeds"
+									]
+								},
+								"description": "Recupera uma lista de todas as raças"
+							},
+							"response": []
+						},
+						{
+							"name": "getBreedByNameApiKeyError",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "29c6517d-42f7-4a0d-bb09-2f88ac2266d7",
+										"exec": [
+											"var jsonData = pm.response.json(); \r",
+											"pm.test(\"Verify Status\", function () { \r",
+											"        pm.expect(jsonData.status).is.to.equal(\"FALHA\"); \r",
+											"    });\r",
+											"\r",
+											"pm.test(\"Verify errorMessage\", function () { \r",
+											"        pm.expect(jsonData.errorMessage).is.to.equal(\"A chave de api está errada ou faltando no header consulte https://github.com/sabiomito/catApi para mais detalhes\"); \r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-API-KEY",
+										"type": "text",
+										"value": "PUBLIC_TEST_API_KEY_WITH_ERROR"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/breedByName?name=Bambino",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"breedByName"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Bambino"
+										}
+									]
+								},
+								"description": "Recupera todas as raças que contem o nome passado por parametro."
+							},
+							"response": []
+						},
+						{
+							"name": "breedsBytemperamentApiKeyError",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4994ec40-d0b8-4f6e-a1ce-e590e8728f3e",
+										"exec": [
+											"var jsonData = pm.response.json(); \r",
+											"pm.test(\"Verify Status\", function () { \r",
+											"        pm.expect(jsonData.status).is.to.equal(\"FALHA\"); \r",
+											"    });\r",
+											"\r",
+											"pm.test(\"Verify errorMessage\", function () { \r",
+											"        pm.expect(jsonData.errorMessage).is.to.equal(\"A chave de api está errada ou faltando no header consulte https://github.com/sabiomito/catApi para mais detalhes\"); \r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-API-KEY",
+										"value": "PUBLIC_TEST_API_KEY_WITH_ERROR",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/breedsBytemperament?temperament=Intelligent",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"breedsBytemperament"
+									],
+									"query": [
+										{
+											"key": "temperament",
+											"value": "Intelligent"
+										}
+									]
+								},
+								"description": "Recupera todas as raças que contem o temperamento passado por parametro."
+							},
+							"response": []
+						},
+						{
+							"name": "breedsByOriginApiKeyError",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7846b811-7c81-473e-8a53-8a1b6072a621",
+										"exec": [
+											"var jsonData = pm.response.json(); \r",
+											"pm.test(\"Verify Status\", function () { \r",
+											"        pm.expect(jsonData.status).is.to.equal(\"FALHA\"); \r",
+											"    });\r",
+											"\r",
+											"pm.test(\"Verify errorMessage\", function () { \r",
+											"        pm.expect(jsonData.errorMessage).is.to.equal(\"A chave de api está errada ou faltando no header consulte https://github.com/sabiomito/catApi para mais detalhes\"); \r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-API-KEY",
+										"type": "text",
+										"value": "PUBLIC_TEST_API_KEY_WITH_ERROR"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/breedsByOrigin?origin=Egypt",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"breedsByOrigin"
+									],
+									"query": [
+										{
+											"key": "origin",
+											"value": "Egypt"
+										}
+									]
+								},
+								"description": "Recupera todas as raças que contem a origem passado por parametro."
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "InvalidParamsError",
+					"item": [
+						{
+							"name": "getBreedByNameInvalidParamsError",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b9d88f29-68b9-47fa-b36f-c3b189c39866",
+										"exec": [
+											"var jsonData = pm.response.json(); \r",
+											"pm.test(\"Verify Status\", function () { \r",
+											"        pm.expect(jsonData.status).is.to.equal(\"FALHA\"); \r",
+											"    });\r",
+											"\r",
+											"pm.test(\"Verify errorMessage\", function () { \r",
+											"        pm.expect(jsonData.errorMessage).is.to.equal(\"O argumento name é invalido.\"); \r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-API-KEY",
+										"type": "text",
+										"value": "PUBLIC_TEST_API_KEY"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/breedByName?name=Bambin.",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"breedByName"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Bambin."
+										}
+									]
+								},
+								"description": "Recupera todas as raças que contem o nome passado por parametro."
+							},
+							"response": []
+						},
+						{
+							"name": "breedsBytemperamentInvalidParamsError",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1ec3b413-df34-492d-a5d7-38bdb86e72a7",
+										"exec": [
+											"var jsonData = pm.response.json(); \r",
+											"pm.test(\"Verify Status\", function () { \r",
+											"        pm.expect(jsonData.status).is.to.equal(\"FALHA\"); \r",
+											"    });\r",
+											"\r",
+											"pm.test(\"Verify errorMessage\", function () { \r",
+											"        pm.expect(jsonData.errorMessage).is.to.equal(\"O argumento temperament é invalido.\"); \r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-API-KEY",
+										"value": "PUBLIC_TEST_API_KEY",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/breedsBytemperament?temperament=Intelligent,",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"breedsBytemperament"
+									],
+									"query": [
+										{
+											"key": "temperament",
+											"value": "Intelligent,"
+										}
+									]
+								},
+								"description": "Recupera todas as raças que contem o temperamento passado por parametro."
+							},
+							"response": []
+						},
+						{
+							"name": "breedsByOriginInvalidParamsError",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b3712a24-4b9d-4356-b0ae-6d26637d5dea",
+										"exec": [
+											"var jsonData = pm.response.json(); \r",
+											"pm.test(\"Verify Status\", function () { \r",
+											"        pm.expect(jsonData.status).is.to.equal(\"FALHA\"); \r",
+											"    });\r",
+											"\r",
+											"pm.test(\"Verify errorMessage\", function () { \r",
+											"        pm.expect(jsonData.errorMessage).is.to.equal(\"O argumento origin é invalido.\"); \r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-API-KEY",
+										"type": "text",
+										"value": "PUBLIC_TEST_API_KEY"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/breedsByOrigin?origin=Egypt:",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"breedsByOrigin"
+									],
+									"query": [
+										{
+											"key": "origin",
+											"value": "Egypt:"
+										}
+									]
+								},
+								"description": "Recupera todas as raças que contem a origem passado por parametro."
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "notFound",
+					"item": [
+						{
+							"name": "getBreedByNameApiKeyError Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b40f9a29-a851-4ba6-b8d4-40555de3adda",
+										"exec": [
+											"var jsonData = pm.response.json(); \r",
+											"pm.test(\"Verify Status\", function () { \r",
+											"        pm.expect(jsonData.status).is.to.equal(\"FALHA\"); \r",
+											"    });\r",
+											"\r",
+											"pm.test(\"Verify errorMessage\", function () { \r",
+											"        pm.expect(jsonData.errorMessage).is.to.equal(\"A chave de api está errada ou faltando no header consulte https://github.com/sabiomito/catApi para mais detalhes\"); \r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-API-KEY",
+										"type": "text",
+										"value": "PUBLIC_TEST_API_KEY_WITH_ERROR"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/breedByName?name=Bambino",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"breedByName"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Bambino"
+										}
+									]
+								},
+								"description": "Recupera todas as raças que contem o nome passado por parametro."
+							},
+							"response": []
+						},
+						{
+							"name": "breedsBytemperamentApiKeyError Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "dcec9535-685c-4194-991b-2cdea93ad22b",
+										"exec": [
+											"var jsonData = pm.response.json(); \r",
+											"pm.test(\"Verify Status\", function () { \r",
+											"        pm.expect(jsonData.status).is.to.equal(\"FALHA\"); \r",
+											"    });\r",
+											"\r",
+											"pm.test(\"Verify errorMessage\", function () { \r",
+											"        pm.expect(jsonData.errorMessage).is.to.equal(\"A chave de api está errada ou faltando no header consulte https://github.com/sabiomito/catApi para mais detalhes\"); \r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-API-KEY",
+										"value": "PUBLIC_TEST_API_KEY_WITH_ERROR",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/breedsBytemperament?temperament=Intelligent",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"breedsBytemperament"
+									],
+									"query": [
+										{
+											"key": "temperament",
+											"value": "Intelligent"
+										}
+									]
+								},
+								"description": "Recupera todas as raças que contem o temperamento passado por parametro."
+							},
+							"response": []
+						},
+						{
+							"name": "breedsByOriginApiKeyError Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2635807e-5e0c-4e5f-bcbc-1e6da52af42e",
+										"exec": [
+											"var jsonData = pm.response.json(); \r",
+											"pm.test(\"Verify Status\", function () { \r",
+											"        pm.expect(jsonData.status).is.to.equal(\"FALHA\"); \r",
+											"    });\r",
+											"\r",
+											"pm.test(\"Verify errorMessage\", function () { \r",
+											"        pm.expect(jsonData.errorMessage).is.to.equal(\"A chave de api está errada ou faltando no header consulte https://github.com/sabiomito/catApi para mais detalhes\"); \r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-API-KEY",
+										"type": "text",
+										"value": "PUBLIC_TEST_API_KEY_WITH_ERROR"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/breedsByOrigin?origin=Egypt",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"breedsByOrigin"
+									],
+									"query": [
+										{
+											"key": "origin",
+											"value": "Egypt"
+										}
+									]
+								},
+								"description": "Recupera todas as raças que contem a origem passado por parametro."
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"description": "Requisições que devem retornar erros para exemplificar",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b8c2173a-6e9d-4856-9741-a68407d93e04",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "26d8a8a4-9ecb-4c9d-952a-cff896d1b7f2",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ba68059e-da00-431d-9d59-8b76a19104e0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f0f8c773-e43f-48ad-963b-53c901da900e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "b6d6459d-7006-4622-ae19-5ca88b6ee3bd",
+			"key": "baseUrl",
+			"value": "http://191.235.78.82:80"
+		},
+		{
+			"id": "f1086852-4f39-454b-bc35-2ab63a48b9ee",
+			"key": "baseUrl",
+			"value": "http://localhost:80",
+			"disabled": true
+		}
+	],
+	"protocolProfileBehavior": {}
+}
