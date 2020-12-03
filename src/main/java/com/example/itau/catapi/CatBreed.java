@@ -6,6 +6,7 @@ public class CatBreed implements Serializable {
     private String origin;
     private String name;
     private String temperament;
+    private String id;
 
     public CatBreed()
     {
@@ -18,6 +19,14 @@ public class CatBreed implements Serializable {
         this.origin = origin;
         this.name = name;
         this.temperament = temperament;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getOrigin() {

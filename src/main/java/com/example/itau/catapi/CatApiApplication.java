@@ -16,8 +16,6 @@ public class CatApiApplication {
         app.setDefaultProperties(Collections
                 .singletonMap("server.port", "80"));
         app.run(args);
-        
-        SpringApplication.run(CatApiApplication.class, args);
     }
 
     private Boolean isStringNumberAndLettersOnly(String str){
@@ -51,7 +49,7 @@ public class CatApiApplication {
             for (CatBreed breed : catApiGetter.getBreeds()) {
                 System.out.println(breed.toString());
                 catDataBase.insertBreed(breed);
-                for (Cat cat : catApiGetter.getImagesUrls(breed.getName())) {
+                for (Cat cat : catApiGetter.getImagesUrls(breed.getId())) {
                     System.out.println(cat.toString());
                     catDataBase.insertCatImageUrl(cat);
                 }
