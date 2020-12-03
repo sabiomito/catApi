@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 import java.sql.*;
+import java.util.Collections;
 
 
 @SpringBootApplication
@@ -11,6 +12,11 @@ import java.sql.*;
 public class CatApiApplication {
 
     public static void main(String[] args) {
+        SpringApplication app = new SpringApplication(CatApiApplication.class);
+        app.setDefaultProperties(Collections
+                .singletonMap("server.port", "80"));
+        app.run(args);
+        
         SpringApplication.run(CatApiApplication.class, args);
     }
 
