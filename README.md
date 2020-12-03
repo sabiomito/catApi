@@ -155,9 +155,11 @@ sudo apt install openjdk-11-jre-headless
 Copie o arquivo [catapi-0.0.1-SNAPSHOT.jar](target/catapi-0.0.1-SNAPSHOT.jar) para qualquer pasta do seu ambiente e para começar o serviço execute o comando:
 
 ```
-sudo nohup java -jar release.jar
+sudo nohup java -jar catapi-0.0.1-SNAPSHOT.jar
 ```
 Após executar é preciso ao menos uma vez requisitar a api **http://191.235.78.82:80/getDataFromTheCatApi** para que os dados da api dos gatos sejam coletados e inserido no banco de dados
+
+É possível utilizar o windows basta instalar o java e executar o jar **catapi-0.0.1-SNAPSHOT.jar** e o mesmo procedimento funciona em uma maquina local
 
 
 ## Documentação do projeto
